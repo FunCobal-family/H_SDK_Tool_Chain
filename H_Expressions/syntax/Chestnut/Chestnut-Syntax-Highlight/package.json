@@ -1,0 +1,25 @@
+{
+    "name": "chestnut-syntax-highlight",
+    "displayName": "Chestnut Syntax Highlight",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "",
+            "aliases": ["Chestnut", ""],
+            "extensions": [".ches"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "",
+            "scopeName": "source.ches",
+            "path": "./syntaxes/.tmLanguage.json"
+        }]
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "ches",
+    "displayName": "Chestnut Pi Syntax Highlight",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "",
+            "aliases": ["Chestnut Pi", ""],
+            "extensions": [".ches"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "",
+            "scopeName": "source.ches",
+            "path": "./syntaxes/.tmLanguage.json"
+        }]
+    }
+}
