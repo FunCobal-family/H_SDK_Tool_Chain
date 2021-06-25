@@ -22,4 +22,6 @@ pub enum SubCommands {
     New { lang: String },
     #[structopt(about = "Make New Application")]
     Create { lang: String },
+    #[structopt(about = "Make New Application")]
+    Hake { lang: String },
 }

@@ -1,24 +1,23 @@
-use crate::opts::{Opt, SubCommands};
+use crate::err::CliError;
+use crate::opts::Opt;
+use crate::opts::SubCommands as sc;
 use std::collections::HashMap;
-use std::io;
+use std::io::{Error, ErrorKind};
 use std::iter::FromIterator;
 use structopt::StructOpt;
 
+mod err;
 mod opts;
 
-#[derive(Debug)]
-enum CliError {
-    IoError(io::Error),
-}
 fn run_hccr(inputFile: String, lang: String) -> Result<(), CliError> {
     if lang.eq("None") {
-        Err(());
+        return Err(CliError::IoError(Error::raw_os_error()));
     }
     Ok(());
 }
 fn compile_hccr(inputFile: String, lang: String) -> Result<(), CliError> {
     if lang.eq("None") {
-        return CliError;
+        CliError(());
     }
     Ok(());
 }
@@ -30,14 +29,20 @@ fn test_hccr(inputFile: String, lang: String) -> Result<(), CliError> {
 }
 fn new_hccr(inputFile: String, lang: String) -> Result<(), CliError> {
     if lang.eq("None") {
-        return Err(err);
+        Err(e);
+    }
+    Ok(());
+}
+fn hake_hccr(inputFile: String, lang: String) -> Result<(), CliError> {
+    if lang.eq("None") {
+        Err(e);
     }
     Ok(());
 }
 
-fn run_subcommand(opts: SubCommands, inputFile: String) -> Result<(), CliError> {
-    let inputFile_spt: Vec<String> = Vec::from_iter(inputFile.split(".")).reverse();
-    let this_ext: String  = inputFile_spt[0];
+fn run_subcommand(opts: sc, inputFile: String) -> Result<(), CliError> {
+    let inputFile_spt: Vec<String> = inputFile.rsplit('.').unwrap();
+    let this_ext: String = inputFile_spt[0];
 
     let langs: HashMap<String, String> = HashMap::new();
     langs.insert("hfc".to_string(), "FunCobal".to_string());
@@ -48,15 +53,16 @@ fn run_subcommand(opts: SubCommands, inputFile: String) -> Result<(), CliError> 
     if langs.contains_key(this_ext) {
         lang_f = langs[this_ext]
     } else {
-        lang_f = "None";
+        lang_f = "None".to_string();
     }
     match opts {
-        SubCommands::Run {} => run_hccr(inputFile, lang_f),
-        SubCommands::Cp {} => compile_hccr(inputFile, lang_f),
-        SubCommands::Compile {} => compile_hccr(inputFile, lang_f),
-        SubCommands::Test {} => test_hccr(inputFile, lang_f),
-        SubCommands::New { lang } => new_hccr(inputFile, lang),
-        SubCommands::Create { lang } => new_hccr(inputFile, lang),
+        sc::Run {} => run_hccr(inputFile, lang_f),
+        sc::Cp {} => compile_hccr(inputFile, lang_f),
+        sc::Compile {} => compile_hccr(inputFile, lang_f),
+        sc::Test {} => test_hccr(inputFile, lang_f),
+        sc::New { lang } => new_hccr(inputFile, lang),
+        sc::Create { lang } => new_hccr(inputFile, lang),
+        sc::Hake { lang } => hake_hccr(inputFile, lang),
     }
 }
 

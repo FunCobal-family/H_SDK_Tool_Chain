@@ -1,0 +1,17 @@
+[spec]
+tsaaspec = ["", "FanCobal_family","FanCobal family Library-Package specification File"]
+[hlpgl-source]
+fcb = ["", "FunCobal", ""]
+ches = ["", "Chestnut", "Chestnut Source File"]
+hjr = ["", "", ""]
+tpp = ["", "", ""]
+bd = ["", "", ""]
+kug = ["", "", ""]
+bss = ["", "", ""]
+tss = ["", "", ""]
+[]
+[bin-source]
+
+[llcl]
+
+[bin]
